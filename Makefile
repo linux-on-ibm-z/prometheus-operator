@@ -4,6 +4,8 @@ GOOS?=$(shell go env GOOS)
 GOARCH?=$(shell go env GOARCH)
 ifeq ($(GOARCH),arm)
 	ARCH=armv7
+else ifeq ($(GOARCH),s390x)
+	ARCH=s390x
 else
 	ARCH=$(GOARCH)
 endif

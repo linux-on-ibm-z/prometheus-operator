@@ -6,7 +6,7 @@ set -o pipefail
 # error on unset variables
 set -u
 
-CPU_ARCHS="amd64 arm64 arm"
+CPU_ARCHS="amd64 arm64 arm s390x"
 
 export TAG="${GITHUB_REF##*/}"
 
@@ -35,7 +35,8 @@ for r in ${REPO} ${REPO_PROMETHEUS_CONFIG_RELOADER}; do
 	docker manifest create -a "${r}:${TAG}" \
 				  "${r}:${TAG}-amd64" \
 				  "${r}:${TAG}-arm64" \
-				  "${r}:${TAG}-arm"
+				  "${r}:${TAG}-arm" \
+				  "${r}:${TAG}-s390x"
 
 	# Annotate to set which image is build for which CPU architecture
 	for arch in $CPU_ARCHS; do
